@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python p01_print.py:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
