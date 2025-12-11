@@ -2,6 +2,7 @@
 # 순서가 없기 때문에 인덱싱이 지원 안됨
 # 중괄호를 사용
 # 데이터의 중복을 제거하기 위한 필터로 종종 사용
+import random
 
 s = set()
 print(s,type(s))
@@ -68,7 +69,7 @@ print('a &=', a, id(a))
 a = a & {3,4,5,6}
 print('a = a &', a, id(a))
 
-a = {1,2,3,4};
+a = {1,2,3,4}; print(id(a))
 a -= {3,4,5,6}
 print('a-= ', a, id(a))
 a = a - {3,4,5,6}
@@ -88,9 +89,10 @@ print('상위집합 issuperset', a.issuperset({1,2,3,4}))
 print('진상위집합 >= ', a >= {1,2,3})
 
 print(a == {1,2,3,4}); print(a == {3,2,1,4})
-print('겹침여부 isdisjoint: ', a.isdisjoint({5,6,7,8}))
-print('겹침여부 isdisjoint: ', a.isdisjoint({3,4,5,6}))
+print('겹침여부아닐경우true isdisjoint: ', a.isdisjoint({5,6,7,8}))
+print('겹침여부아닐경우true isdisjoint: ', a.isdisjoint({3,4,5,6}))
 
+print(f'{" set 함수 ":=^20}')
 print(a, type(a))
 a.add(5); print(a)
 a.remove(5); print(a) # element가 없으면 에러
@@ -98,6 +100,8 @@ a.discard(9); print(a)# element가 없으도 OK
 a.pop(); print(a) # 임의의 element를 삭제
 print(len(a))
 
+print(f'{"Shallow Copy":=^20}')
+a = {1,2,3,4,5}; print(a)
 a = {1,2,3,4}; print("a", a, id(a))
 b = a; # 주소를 복사 a와 b가 동일
 print("b", b, id(b))
@@ -105,9 +109,11 @@ print(a is b)
 b.add(5)
 print(a, b)
 
+print(f'{"Deep Copy":=^20}')
 a = {1,2,3,4}; print("a", a, id(a))
 b = a.copy() # a와 b는 다른 set
 print("b", b, id(b))
+print(a is b)
 b.add(5)
 print(a, b)
 
@@ -116,13 +122,14 @@ print()
 for i in {1,2,3,4}: print(i, end=" ")
 print()
 a = {i for i in 'pineapple' if i not in 'apl'}
+print(a, type(a))
 a = set(i for i in 'pineapple' if i not in 'apl')
-print(a)
+print(a, type(a))
 
 #집합의 내용 수정 안됨, 2 차원 이상 생성 가능
 a = frozenset(range(5))
 a = frozenset({0,1,2,3,4})
-print(a)
+print(a, type(a))
 a = frozenset({
   frozenset({1,2}), frozenset(range(3,5))
 })
@@ -143,6 +150,7 @@ s1 = set("hello")
 s = set()
 s.add(1)
 s.add(2)
+print(s, type(s))
 s.update([2, 3])
 print(s, type(s))
 s.remove(2) # 원소를 제거, 없으면 에러 발생
@@ -156,7 +164,7 @@ print(1 not in s)
 
 # Set 표현식
 words = "나는 파이썬을 공부하고 있습니다. 파이썬은 무척 심플하고 명료합니다.".split()
-{len(word) for word in words}
+print({word for word in words})
 print(words)
 # Set 표현식 if 필터링
-{len(word) for word in words if len(word)> 3}
+print({len(word) for word in words if len(word)> 3})
