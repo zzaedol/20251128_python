@@ -10,3 +10,4 @@ print(dir(module))  # 모든 것은 객체다.
 print(module.fetch_words.__doc__) #모듈의 첫번째 줄의 큰따옴표,홑따옴표 3개
 
 module.fetch_words()
+

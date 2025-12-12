@@ -29,7 +29,7 @@ def fetch_line_url():
     :param url: 불러올 url
     :return:
   """
-  with urlopen('외부주소') as story:
+  with urlopen(file_location) as story:
     story_lines = []
     for line in story: story_lines.append(line)  # 라인으로 담기
   for line in story_lines: print(line)
