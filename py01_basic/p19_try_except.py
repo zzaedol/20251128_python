@@ -53,7 +53,7 @@ def convert(s):
 
 
 print(convert("55"))
-print(convert("test"))
+# print(convert("test"))
 
 
 # finally block
@@ -77,11 +77,13 @@ def convert(s):
     print('에러정보 : ', e, file=sys.stderr)
     raise ValueError("Argument에 잘못된 값이 전달되었습니다.")
   else:
-    print('에러가 발생하지 않았어요!!')
+    print('에러가 발생하지 않을 경우 무조건 출력!')
   finally:
     print('여기는 에러가 발생할 때도, 안 할때도 무조건 실행됩니다.')
   return a
 
+print(convert("55"))
+# print(convert("test"))
 
 # EAFP - 'It's Easier to Ask Forgiveness than Permission' 의 줄임말. 허락보다 용서구하는 것이 쉽다.
 # LBYL - 'Look Before You Leap'의 줄임말입니다. 도약하기전에 봐라. 라는 뜻.
@@ -128,8 +130,14 @@ try:
   # Windows용 코드
   import msvcrt
   def getkey():
-    """단일키 누르는 것을 받아옴"""
-    return msvcrt.getch()
+    """
+    msvcrt.getch()사용자가 키를 누르는 즉시 해당 문자를 반환, 화면 출력없음
+    input() 사용자가 enter키를 눌러야 프로그램이 입력받음(버퍼링방식)
+    """
+    print("아무키나 누르세요...")
+    # key_byte = msvcrt.getch()
+    # print(type(key_byte), key_byte)
+    print(f"사용자가 누른키: {msvcrt.getch()}")
 except ImportError:
   # Linux & Mac 용 코드
   import sys
@@ -146,3 +154,6 @@ except ImportError:
     finally:
       termios.tcsetattr(fd, termios.TCSADRAIN, original_attributes)
     return ch
+  print("오류: 숫자를 입력해야 합니다.")
+
+getkey()
