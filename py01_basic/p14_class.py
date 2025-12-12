@@ -430,22 +430,7 @@ class Student:
 s = Student("Charlie")
 print(s.name, s.grades)
 
-# 클래스 간 상속에서 생성자 사용
-class Animal:
-  def __init__(self, species):
-    self.species = species
-
-
-class Dog(Animal):
-  def __init__(self, name, breed):
-    super().__init__("Dog")
-    self.name = name
-    self.breed = breed
-
-d = Dog("Max", "Golden Retriever")
-print(d.species, d.name, d.breed)
-
-# Singleton 패턴
+print(f'{"Singleton 패턴":=^20}')
 class Singleton:
   _instance = None
 
@@ -459,28 +444,59 @@ a = Singleton()
 b = Singleton()
 print(a is b)
 print(id(a), id(b))
+print()
 
-class Country:
-  """Super Class"""
-  name = '국가명'
-  population = '인구'
-  capital = '수도'
+print(f'{"@classmethod와 @staticmethod":=^30}')
+# 정적메소드(@classmethod와 @staticmethod)
+class CustomClass:
+  # instance method
+  def add_instance_method(self, a, b):
+    return a + b
 
-  def show(self):
-    print('국가 클래스의 메소드입니다.')
+  # classmethod
+  @classmethod
+  def add_class_method(cls, a, b):
+    return a + b
+
+  # staticmethod
+  @staticmethod
+  def add_static_method(a, b):
+    return a + b
 
 
-class Korea(Country):
-  """Sub Class"""
+print(CustomClass.add_static_method(1,1))
+print(CustomClass.add_class_method(1, 1))
 
-  def __init__(self, name):
-    self.name = name
 
-  def show_name(self):
-    print('국가 이름은 : ', self.name)
+# @classmethod와 @staticmethod 의 차이
+class Language:
+  default_language = "English"
 
-korea = Korea("대한민국")
-print(korea.name)
-print(korea.show_name())
-print(korea.capital)
-print(korea.show())
+  def __init__(self):
+    self.show = '나의 언어는 ' + self.default_language
+
+  # cls 나 self등의 매개변수를 받는 경우, 클래스의 속성에 접근 가능
+  @classmethod
+  def class_my_language(cls):
+    return cls()
+
+  # cls 나 self등의 매개변수를 받지못함, 인스턴스를 생성하는 기능제공
+  @staticmethod
+  def static_my_language():
+    # print(self.default_language) #속성 접근 불가
+    return Language()
+
+  def print_language(self):
+    print(self.show)
+
+
+print(Language.static_my_language())
+print(Language.class_my_language())
+
+
+class KoreanLanguage(Language):
+  default_language = "한국어"
+
+
+kor = KoreanLanguage()
+kor.print_language()
